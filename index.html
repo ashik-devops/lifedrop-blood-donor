@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeDrop – Blood Donor Management System</title>
+  <meta name="description" content="LifeDrop is a university demo website that connects blood donors with people searching for blood.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Demo notice: this is a university frontend project, not a real medical service -->
+  <div class="demo-banner">
+    Demo university project only. No real patient or donor data is stored.
+  </div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">
+        <img src="assets/logo.svg" alt="LifeDrop logo">
+        <span>
+          <strong>LifeDrop</strong>
+          <small>Every Drop Can Save a Life</small>
+        </span>
+      </a>
+
+      <!-- Desktop and mobile navigation links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#find-donors">Find Donors</a>
+        <a href="#become-donor">Become a Donor</a>
+        <a href="#blood-requests">Blood Requests</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark</button>
+        <a class="btn btn-primary" href="#become-donor">Register</a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="badge">Blood Donation Management System</span>
+          <h1>Donate Blood, Save Lives</h1>
+          <p class="tagline">Every Drop Can Save a Life</p>
+          <p class="subtitle">Connect blood donors with people who need help and make a meaningful difference.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#find-donors">Find a Donor</a>
+            <a class="btn btn-outline" href="#become-donor">Become a Donor</a>
+          </div>
+        </div>
+        <div class="hero-image card">
+          <!-- PNG is used if present; SVG is a reliable fallback illustration -->
+          <img src="assets/hero-donation.png" alt="Blood donation in a clinic"
+               onerror="this.onerror=null; this.src='assets/hero-illustration.svg';">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BLOOD GROUPS ===================== -->
+    <section class="section" id="blood-groups">
+      <div class="container">
+        <div class="section-header">
+          <h2>Blood Groups</h2>
+          <p>Select a blood group to filter donor search.</p>
+        </div>
+        <div class="blood-group-grid" id="bloodGroupButtons"></div>
+        <p class="filter-message" id="bloodGroupMessage">Select a blood group to start filtering donors.</p>
+      </div>
+    </section>
+
+    <!-- ===================== FIND DONORS ===================== -->
+    <section class="section alt" id="find-donors">
+      <div class="container">
+        <div class="section-header">
+          <h2>Find Donors</h2>
+          <p>Search sample donors by blood group, location, and availability.</p>
+        </div>
+
+        <form class="filter-form card" id="donorFilterForm">
+          <label>
+            Blood Group
+            <select id="filterBloodGroup">
+              <option value="">All Groups</option>
+            </select>
+          </label>
+          <label>
+            Location
+            <select id="filterLocation">
+              <option value="">All Locations</option>
+            </select>
+          </label>
+          <label>
+            Availability
+            <select id="filterAvailability">
+              <option value="">All</option>
+              <option value="Available">Available</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <div class="card-grid" id="donorCards"></div>
+        <p class="empty-message" id="noDonorMessage">No matching donors found</p>
+      </div>
+    </section>
+
+    <!-- ===================== BECOME A DONOR ===================== -->
+    <section class="section" id="become-donor">
+      <div class="container two-col">
+        <div>
+          <div class="section-header left">
+            <h2>Become a Donor</h2>
+            <p>Fill this demo form to practice frontend validation. Data is not sent to a server.</p>
+          </div>
+          <ul class="info-list">
+            <li>Use a valid email format, for example name@email.com</li>
+            <li>Phone should be 11 digits, for example 01712345678</li>
+            <li>All fields are required for this demo</li>
+          </ul>
+        </div>
+
+        <form class="form card" id="donorForm">
+          <label>Full Name
+            <input type="text" id="donorName" name="fullName" placeholder="Rahim Ahmed">
+          </label>
+          <label>Email
+            <input type="email" id="donorEmail" name="email" placeholder="rahim@email.com">
+          </label>
+          <label>Phone Number
+            <input type="text" id="donorPhone" name="phone" placeholder="01712345678">
+          </label>
+          <label>Blood Group
+            <select id="donorBloodGroup" name="bloodGroup"></select>
+          </label>
+          <label>Age
+            <input type="number" id="donorAge" name="age" min="18" max="65" placeholder="25">
+          </label>
+          <label>Gender
+            <select id="donorGender" name="gender">
+              <option value="">Select gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Location
+            <select id="donorLocation" name="location"></select>
+          </label>
+          <label>Availability
+            <select id="donorAvailability" name="availability">
+              <option value="">Select availability</option>
+              <option>Available</option>
+              <option>Unavailable</option>
+            </select>
+          </label>
+          <label>Last Donation Date
+            <input type="date" id="donorLastDonation" name="lastDonation">
+          </label>
+          <p class="form-error" id="donorFormError"></p>
+          <p class="form-success" id="donorFormSuccess"></p>
+          <button class="btn btn-primary" type="submit">Register as Donor</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== BLOOD REQUEST FORM ===================== -->
+    <section class="section alt" id="blood-requests">
+      <div class="container">
+        <div class="section-header">
+          <h2>Blood Requests</h2>
+          <p>Submit a demo request or review sample request cards.</p>
+        </div>
+
+        <div class="two-col">
+          <form class="form card" id="requestForm">
+            <label>Patient Name
+              <input type="text" id="patientName" placeholder="Demo Patient">
+            </label>
+            <label>Blood Group
+              <select id="requestBloodGroup"></select>
+            </label>
+            <label>Hospital Name
+              <input type="text" id="hospitalName" placeholder="Khulna Medical College Hospital">
+            </label>
+            <label>Location
+              <select id="requestLocation"></select>
+            </label>
+            <label>Required Date
+              <input type="date" id="requiredDate">
+            </label>
+            <label>Contact Number
+              <input type="text" id="requestPhone" placeholder="01712345678">
+            </label>
+            <label>Urgency Level
+              <select id="urgencyLevel">
+                <option value="">Select urgency</option>
+                <option>Normal</option>
+                <option>Urgent</option>
+                <option>Emergency</option>
+              </select>
+            </label>
+            <label>Additional Message
+              <textarea id="requestMessage" rows="3" placeholder="Short extra details (demo only)"></textarea>
+            </label>
+            <p class="form-error" id="requestFormError"></p>
+            <p class="form-success" id="requestFormSuccess"></p>
+            <button class="btn btn-primary" type="submit">Submit Request</button>
+          </form>
+
+          <div>
+            <h3 class="subheading">Sample Requests</h3>
+            <div class="card-grid compact" id="requestCards"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STATISTICS ===================== -->
+    <section class="section" id="statistics">
+      <div class="container">
+        <div class="section-header">
+          <h2>Project Statistics</h2>
+          <p>Demo numbers used for presentation only.</p>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card card">
+            <span class="stat-number" data-target="128">0</span>
+            <p>Registered Donors</p>
+          </article>
+          <article class="stat-card card">
+            <span class="stat-number" data-target="46">0</span>
+            <p>Blood Requests</p>
+          </article>
+          <article class="stat-card card">
+            <span class="stat-number" data-target="89">0</span>
+            <p>Successful Connections</p>
+          </article>
+          <article class="stat-card card">
+            <span class="stat-number" data-target="8">0</span>
+            <p>Blood Groups</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="section alt" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Four simple steps used in this demo interface.</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card card">
+            <div class="step-icon">1</div>
+            <h3>Register as a Donor</h3>
+            <p>Add demo donor details using the registration form.</p>
+          </article>
+          <article class="step-card card">
+            <div class="step-icon">2</div>
+            <h3>Search for a Blood Group</h3>
+            <p>Filter sample donors by group, location, and availability.</p>
+          </article>
+          <article class="step-card card">
+            <div class="step-icon">3</div>
+            <h3>Send a Request</h3>
+            <p>Fill the blood request form with demo patient information.</p>
+          </article>
+          <article class="step-card card">
+            <div class="step-icon">4</div>
+            <h3>Connect and Help</h3>
+            <p>Open a donor or request card to see extra demo details.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="section" id="about">
+      <div class="container two-col">
+        <div>
+          <div class="section-header left">
+            <h2>About LifeDrop</h2>
+          </div>
+          <p>
+            LifeDrop is a university project designed to demonstrate how a simple web-based
+            blood donor management interface can help connect blood donors with people searching for blood.
+          </p>
+          <p>
+            This frontend demo was created for
+            <strong>Northern University of Business and Technology Khulna</strong>.
+          </p>
+          <p><strong>Developed by Ashikur Rahman</strong></p>
+        </div>
+
+        <article class="project-card card">
+          <h3>Project Information</h3>
+          <p><strong>Project:</strong> LifeDrop – Blood Donor Management System</p>
+          <p><strong>University:</strong> Northern University of Business and Technology Khulna</p>
+          <p><strong>Developer:</strong> Ashikur Rahman</p>
+          <p><strong>Technology:</strong> HTML5, CSS3, Vanilla JavaScript</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section alt" id="contact">
+      <div class="container two-col">
+        <div>
+          <div class="section-header left">
+            <h2>Contact</h2>
+            <p>Demo contact details for the university project.</p>
+          </div>
+          <ul class="contact-list">
+            <li><strong>Email:</strong> ashikur.rahman@demo-nubtk.edu</li>
+            <li><strong>Phone:</strong> 01700000000</li>
+            <li><strong>University:</strong> Northern University of Business and Technology Khulna</li>
+            <li><strong>Location:</strong> Khulna, Bangladesh</li>
+          </ul>
+        </div>
+
+        <form class="form card" id="contactForm">
+          <label>Name
+            <input type="text" id="contactName" placeholder="Your name">
+          </label>
+          <label>Email
+            <input type="email" id="contactEmail" placeholder="your@email.com">
+          </label>
+          <label>Message
+            <textarea id="contactMessage" rows="4" placeholder="Write a short message"></textarea>
+          </label>
+          <p class="form-error" id="contactFormError"></p>
+          <p class="form-success" id="contactFormSuccess"></p>
+          <button class="btn btn-primary" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>LifeDrop</h3>
+        <p>Every Drop Can Save a Life</p>
+        <p>Northern University of Business and Technology Khulna</p>
+        <p>Developed by Ashikur Rahman</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#find-donors">Find Donors</a>
+        <a href="#become-donor">Become a Donor</a>
+        <a href="#blood-requests">Blood Requests</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Blood Groups</h4>
+        <p>A+, A-, B+, B-, AB+, AB-, O+, O-</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>ashikur.rahman@demo-nubtk.edu</p>
+        <p>01700000000</p>
+        <p>Khulna, Bangladesh</p>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> LifeDrop. University demo project. Developed by Ashikur Rahman.</p>
+  </footer>
+
+  <!-- Modal used for donor and request details -->
+  <div class="modal" id="detailsModal" hidden>
+    <div class="modal-box card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTopBtn" type="button" aria-label="Scroll to top">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
